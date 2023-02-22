@@ -5,31 +5,34 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>clock</title>
+  <!-- 1小时刷新一次 -->
+  <meta http-equiv="refresh" content="3600">
+  <title>NarymaxClock</title>
   <style type="text/css">
    body{
-background-image:url(https://api.cyrilstudio.top/bing/image.php/bing?rand=true);
+/* background-image:url(https://api.cyrilstudio.top/bing/image.php/bing?rand=true); */
+background-image:url(R-C.jpg);
 background-size:cover;
 background-attachment:fixed;
 background-repeat: no-repeat;
-background-postion:center;
+background-postion: center;
 }
 
-	
-    .container {
+  .container {
       margin-top: 30px;
     }
     .time {
-      font-size: 500%;
+      font-size: 1200%;
       text-align: center;
-	margin: 0 auto;
-width:400px;
-background:rgba(255,255,255,0.3);
-border-radius: 25px;
+	    margin: 0 auto;
+      width:800px;
+      background:rgba(255,255,255,0.5);
+      border-radius: 25px;
     }
 
 
     .date {
+      margin-top:20px;
       font-size: 280%;
       text-align: center;
     }
@@ -41,19 +44,46 @@ border-radius: 25px;
     }
     .intro{
       text-align: center;
-      margin-top: 100px;
+      margin-top: 20px;
       font-size: 150%;
+      margin-bottom: 20px;
     }
 
 .weather{
-text-align:center;
-background:rgba(128,128,128,0.3);
-width:600;
-height:350;
-margin:0 200px;
-border-radius: 25px;
-//allowtransparency: true;
-}
+    text-align:center;
+    background:rgba(255,255,255,0.7);
+    width:800px;
+    height:180px;
+    margin:0 auto;
+    border-radius: 25px;
+    allowtransparency: true;
+    }
+
+
+    button{
+	            background-color:rgba(255,200,200,0.5);
+	            /* color:rgb(255, 255, 255); */
+	            width: 100px;
+	            height: 35px;
+	            border:0;
+	            font-size: 16px;
+	            box-sizing: content-box;				
+              border-radius: 5px;
+            }
+    /* button:hover{
+	            background-color: #a54b4a;
+            } */
+
+    input{
+      background: rgba(255,200,200,0.5);
+      outline-style: none ;
+      border: 1px solid #ccc; 
+      border-radius: 3px;
+      width:30px;
+      height: 25px;
+          }
+
+            
 
     /* .img {
       text-align: right;
@@ -73,50 +103,168 @@ border-radius: 25px;
     <div class="time" id="time">00:00:00</div>
     <div class="date" id="date">1月1日</div>
     <div class="week" id="week">星期一</div>
-    <div class="intro">时不我待啊，朋友们！</div>
-   <div class="weather">
-        <iframe style="border:solid 2px #7ec8ea" width="600" height="120" align="middle" frameborder="0" scrolling="no" hspace="0" src="https://i.tianqi.com/?c=code&a=getcode&id=48&num=6&icon=1"></iframe>
-      <iframe width="600" height="150" frameborder="0" scrolling="no" hspace="0" src="https://i.tianqi.com/?c=code&a=getcode&id=19&py=chongqing&icon=1"></iframe>
-    </div>
- </div>
-
-  <!-- <div class="img" id="img">
-   < img src="http://img.mp.itc.cn/q_70,c_zoom,w_640/upload/20170511/189edb8fc9d04eaa9597351927f19eb8_th.jpg">
+    <div class="intro">时不我待啊，朋友！</div>
   </div>
-  <p>DESIGNED BY &copy;CHEN CC</p > -->
+
+  <div class="weather">
+    <!-- <iframe style="border:solid 2px #7ec8ea" width="600" height="120" align="middle" frameborder="0" scrolling="no" hspace="0" src="https://i.tianqi.com/?c=code&a=getcode&id=48&num=6&icon=1"></iframe> -->
+    <iframe width="600" height="150" frameborder="0" scrolling="no" hspace="0" src="https://i.tianqi.com/?c=code&a=getcode&id=19&py=suzhou&icon=1"></iframe>
+  </div>
+
+
+  <div style="text-align: right">
+    <button class="hourlyBeep" id="hb" type="button" onclick="hourBeep()">cuckoo</button>
+    <br>
+    <br>
+    <!-- 默认提醒时间 -->
+    <input type="number" id="hourTime" value="21">:
+    <input type="number" id="minusTime" value="10">:
+    <input type="number" id="secondsTime" value="0">
+    <button class="alarmBeep"type="button" id="alarm" onclick="clickalarmBeep()"> time to sleep </button>
+  </div>
+
+
+
   <script>
+
+    flag_hourlybeep=true
+    flag_alarmbeep=true
+    flag=1
+
+    function clickalarmBeep()
+    {
+      var y=document.getElementById("alarm")
+      flag_alarmbeep =! flag_alarmbeep
+
+      console.log(1)
+
+      if(flag_alarmbeep==true)
+      {
+        console.log("开了闹钟")
+        y.innerHTML='time to sleep'
+        y.style.color="#000000";
+        setInterval("alarmBeep()",1000)
+      }
+      else
+      {
+        y.style.color="#eeeeee";
+        y.innerHTML='定时提醒关'
+        clearInterval(alarmBeepRepeat)
+        console.log("关了闹钟")
+      }
+    }
+      
+
+    function hourBeep()
+    {
+      var x=document.getElementById("hb");
+      flag_hourlybeep = !flag_hourlybeep
+
+      console.log(flag_hourlybeep)
+
+      flag = 1 + flag
+      console.log(flag)
+
+      if(flag_hourlybeep==true)
+      {
+        console.log("开了布谷")
+        x.style.color="#000000";
+        x.innerHTML='cukoo'
+        setInterval("funHourlyBeep()",1000)
+      }
+      else
+      {
+        x.style.color="#ffffff";
+        x.innerHTML='整点报时关'
+        clearInterval(houlyBeepRepeat)
+        console.log("关了布谷")
+      }
+    }
+
+
+    // 时钟刷新
     function update() {
       var date = new Date()
       var utc8DiffMinutes = date.getTimezoneOffset() + 480
       date.setMinutes(date.getMinutes() + utc8DiffMinutes)
-      var timeString = date.getHours() + ':' + ('0' + date.getMinutes()).slice(-2) + ':' + date.getSeconds()
+      
       // var timeString = date.toLocaleTimeString("it-IT")
+      var apm="AM"
+      var hourT=date.getHours()
+      if(Number(date.getHours())>=13)
+        apm="PM"
+        houtT=Number(date.getHours())-12
+
+
+      var timeString = houtT + ':' + ('0' + date.getMinutes()).slice(-2) + ':' + ('0'+date.getSeconds()).slice(-2)
+
+
       var dateString = (date.getMonth() + 1) + '月' + date.getDate() + '日'
       var weekList = ['日', '一', '二', '三', '四', '五', '六']
-      var weekString = '星期' + weekList[date.getDay()]
+      var weekString = '星期' + weekList[date.getDay()]+'      '+apm
       document.getElementById("time").innerHTML = timeString
       document.getElementById("date").innerHTML = dateString
       document.getElementById("week").innerHTML = weekString
-
-	
-     var tempt=date.getSeconds()
-console.log(Number(tempt))
-     if(Number(tempt)/5==0)
-	{
-	alert("555")
-  	var music = new Audio('./布谷鸟叫声mp3_爱给网_aigei_com.wav');
- 	 music.play();
-	console.log(tempt)
-	}
     }
+
+    //整点报时
+    //早上9点到晚上9点
+    function funHourlyBeep() {
+      var date = new Date()
+      var utc8DiffMinutes = date.getTimezoneOffset() + 480
+      date.setMinutes(date.getMinutes() + utc8DiffMinutes)
+      var timeString = date.getHours() + ':' + ('0' + date.getMinutes()).slice(-2) + ':' + date.getSeconds()
+
+      // console.log(date.getMinutes())
+      // console.log(date.getSeconds())
+  
+      // Number(date.getSeconds())==0 || Number(date.getSeconds())==20||Number(date.getSeconds())==40
+      if(
+        Number(date.getMinutes())==0 &&
+        Number(date.getSeconds())==0 &&
+        Number(date.getHours())>=9   &&
+        Number(date.getHours())<=21
+        )
+      {
+        var music = new Audio('./布谷鸟叫声mp3_爱给网_aigei_com.wav');
+        music.play();
+      }
+    }
+
+    //定时提醒
+    function alarmBeep() {
+      var date = new Date()
+      var utc8DiffMinutes = date.getTimezoneOffset() + 480
+      date.setMinutes(date.getMinutes() + utc8DiffMinutes)
+      var timeString = date.getHours() + ':' + ('0' + date.getMinutes()).slice(-2) + ':' + date.getSeconds()
+  
+      if(document.getElementById("hourTime").value==Number(date.getHours()) &&
+      document.getElementById("minusTime").value==Number(date.getMinutes())&&
+      document.getElementById("secondsTime").value==Number(date.getSeconds()))
+      {
+        var music = new Audio('./原声吉他 - 困倦 _ 原声吉他 - 困倦 - 结束2 - 127bpm Gm_Freesound.wav');
+        music.play();
+      }
+    }
+
+
+
+
+
     update()
     setInterval("update()", 1000)
+
+    funHourlyBeep()
+    var houlyBeepRepeat=setInterval("funHourlyBeep()",1000)
+
+    alarmBeep()
+    var alarmBeepRepeat=setInterval("alarmBeep()",1000)
+
+
+
   </script>
 
 
-<!--<img src="https://api.cyrilstudio.top/bing/image.php/bing?rand=true" size="1920x1080" alt="必应壁纸">-->
 
 </body>
-
-
 </html>

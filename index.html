@@ -1,0 +1,122 @@
+<!--A Simple Clock-->
+<!DOCTYPE html>
+<html>
+
+
+<head>
+  <meta charset="utf-8" />
+  <title>clock</title>
+  <style type="text/css">
+   body{
+background-image:url(https://api.cyrilstudio.top/bing/image.php/bing?rand=true);
+background-size:cover;
+background-attachment:fixed;
+background-repeat: no-repeat;
+background-postion:center;
+}
+
+	
+    .container {
+      margin-top: 30px;
+    }
+    .time {
+      font-size: 500%;
+      text-align: center;
+	margin: 0 auto;
+width:400px;
+background:rgba(255,255,255,0.3);
+border-radius: 25px;
+    }
+
+
+    .date {
+      font-size: 280%;
+      text-align: center;
+    }
+
+
+    .week {
+      font-size: 280%;
+      text-align: center;
+    }
+    .intro{
+      text-align: center;
+      margin-top: 100px;
+      font-size: 150%;
+    }
+
+.weather{
+text-align:center;
+background:rgba(128,128,128,0.3);
+width:600;
+height:350;
+margin:0 200px;
+border-radius: 25px;
+//allowtransparency: true;
+}
+
+    /* .img {
+      text-align: right;
+    }
+
+
+    img {
+      width: 300px;
+      height: 300px;
+    } */
+  </style>
+</head>
+
+
+<body>
+  <div class="container">
+    <div class="time" id="time">00:00:00</div>
+    <div class="date" id="date">1月1日</div>
+    <div class="week" id="week">星期一</div>
+    <div class="intro">时不我待啊，朋友们！</div>
+   <div class="weather">
+        <iframe style="border:solid 2px #7ec8ea" width="600" height="120" align="middle" frameborder="0" scrolling="no" hspace="0" src="https://i.tianqi.com/?c=code&a=getcode&id=48&num=6&icon=1"></iframe>
+      <iframe width="600" height="150" frameborder="0" scrolling="no" hspace="0" src="https://i.tianqi.com/?c=code&a=getcode&id=19&py=chongqing&icon=1"></iframe>
+    </div>
+ </div>
+
+  <!-- <div class="img" id="img">
+   < img src="http://img.mp.itc.cn/q_70,c_zoom,w_640/upload/20170511/189edb8fc9d04eaa9597351927f19eb8_th.jpg">
+  </div>
+  <p>DESIGNED BY &copy;CHEN CC</p > -->
+  <script>
+    function update() {
+      var date = new Date()
+      var utc8DiffMinutes = date.getTimezoneOffset() + 480
+      date.setMinutes(date.getMinutes() + utc8DiffMinutes)
+      var timeString = date.getHours() + ':' + ('0' + date.getMinutes()).slice(-2) + ':' + date.getSeconds()
+      // var timeString = date.toLocaleTimeString("it-IT")
+      var dateString = (date.getMonth() + 1) + '月' + date.getDate() + '日'
+      var weekList = ['日', '一', '二', '三', '四', '五', '六']
+      var weekString = '星期' + weekList[date.getDay()]
+      document.getElementById("time").innerHTML = timeString
+      document.getElementById("date").innerHTML = dateString
+      document.getElementById("week").innerHTML = weekString
+
+	
+     var tempt=date.getSeconds()
+console.log(Number(tempt))
+     if(Number(tempt)/5==0)
+	{
+	alert("555")
+  	var music = new Audio('./布谷鸟叫声mp3_爱给网_aigei_com.wav');
+ 	 music.play();
+	console.log(tempt)
+	}
+    }
+    update()
+    setInterval("update()", 1000)
+  </script>
+
+
+<!--<img src="https://api.cyrilstudio.top/bing/image.php/bing?rand=true" size="1920x1080" alt="必应壁纸">-->
+
+</body>
+
+
+</html>

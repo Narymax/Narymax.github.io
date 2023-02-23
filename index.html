@@ -10,8 +10,8 @@
   <title>NarymaxClock</title>
   <style type="text/css">
    body{
-/* background-image:url(https://api.cyrilstudio.top/bing/image.php/bing?rand=true); */
-background-image:url(R-C.jpg);
+background-image:url(https://api.cyrilstudio.top/bing/image.php/bing?rand=true);
+<!--background-image:url(R-C.jpg)-->;
 background-size:cover;
 background-attachment:fixed;
 background-repeat: no-repeat;
@@ -192,10 +192,10 @@ background-postion: center;
       var apm="AM"
       var hourT=date.getHours()
       if(Number(date.getHours())>=13)
+      {
         apm="PM"
         houtT=Number(date.getHours())-12
-
-
+      }
       var timeString = houtT + ':' + ('0' + date.getMinutes()).slice(-2) + ':' + ('0'+date.getSeconds()).slice(-2)
 
 

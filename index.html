@@ -7,25 +7,28 @@
   <meta charset="utf-8" />
   <!-- 1小时刷新一次 -->
   <meta http-equiv="refresh" content="3600">
-  <title>NarymaxClock</title>
+  <title>clock</title>
   <style type="text/css">
+    *{margin:0;padding:0;}
+  
    body{
-background-image:url(https://api.cyrilstudio.top/bing/image.php/bing?rand=true);
-<!--background-image:url(R-C.jpg)-->;
-background-size:cover;
-background-attachment:fixed;
-background-repeat: no-repeat;
-background-postion: center;
-}
+    background-image:url(https://api.cyrilstudio.top/bing/image.php/bing?rand=true);
+    /* background-image:url(./test/R-C.jpg); */
+    background-size:cover;
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+    background-postion: center;
+    }
 
-  .container {
+    .container {
       margin-top: 30px;
     }
+
     .time {
-      font-size: 1200%;
+      font-size: 1600%;
       text-align: center;
 	    margin: 0 auto;
-      width:800px;
+      width:1050px;
       background:rgba(255,255,255,0.5);
       border-radius: 25px;
     }
@@ -37,11 +40,11 @@ background-postion: center;
       text-align: center;
     }
 
-
     .week {
       font-size: 280%;
       text-align: center;
     }
+
     .intro{
       text-align: center;
       margin-top: 20px;
@@ -49,19 +52,35 @@ background-postion: center;
       margin-bottom: 20px;
     }
 
-.weather{
-    text-align:center;
-    background:rgba(255,255,255,0.7);
-    width:800px;
-    height:180px;
-    margin:0 auto;
-    border-radius: 25px;
-    allowtransparency: true;
+   .dwi{
+      display: inline-block;
+      background: rgba(255,255,255,0.5);
+      border-radius: 20px;
+      width:280px;
+      height: 240px;
+      margin: 0 auto;
     }
+
+    .weather{
+      display: inline-block;
+      text-align:center;
+      background:rgba(255,255,255,0.7);
+      width:600px;
+      height:250px;
+      margin:10px auto;
+      border-radius: 25px;
+      allowtransparency: true;
+    }
+
+    .down{
+      text-align:center;
+    }
+
+ 
 
 
     button{
-	            background-color:rgba(255,200,200,0.5);
+	            background-color:#ff6f6a;
 	            /* color:rgb(255, 255, 255); */
 	            width: 100px;
 	            height: 35px;
@@ -75,7 +94,6 @@ background-postion: center;
             } */
 
     input{
-      background: rgba(255,200,200,0.5);
       outline-style: none ;
       border: 1px solid #ccc; 
       border-radius: 3px;
@@ -101,27 +119,33 @@ background-postion: center;
 <body>
   <div class="container">
     <div class="time" id="time">00:00:00</div>
-    <div class="date" id="date">1月1日</div>
-    <div class="week" id="week">星期一</div>
-    <div class="intro">时不我待啊，朋友！</div>
   </div>
 
-  <div class="weather">
-    <!-- <iframe style="border:solid 2px #7ec8ea" width="600" height="120" align="middle" frameborder="0" scrolling="no" hspace="0" src="https://i.tianqi.com/?c=code&a=getcode&id=48&num=6&icon=1"></iframe> -->
-    <iframe width="600" height="150" frameborder="0" scrolling="no" hspace="0" src="https://i.tianqi.com/?c=code&a=getcode&id=19&py=suzhou&icon=1"></iframe>
+  <div class="down">
+
+    <div class="dwi">
+      <div class="date" id="date">1月1日</div>
+      <div class="week" id="week">星期一</div>
+      <div class="intro">时不我待啊，朋友！</div>
+    </div>
+
+    <div class="weather" id="weatheriframe">
+      <!-- <iframe style="border:solid 2px #7ec8ea" width="600" height="120" align="middle" frameborder="0" scrolling="no" hspace="0" src="https://i.tianqi.com/?c=code&a=getcode&id=48&num=6&icon=1"></iframe> -->
+      <iframe width="600" height="210" frameborder="0" scrolling="no" hspace="0" src="https://i.tianqi.com/?c=code&a=getcode&id=19&py=suzhou&icon=1"></iframe>
+    </div>
   </div>
 
 
-  <div style="text-align: right">
+  <!-- <div style="text-align: right">
     <button class="hourlyBeep" id="hb" type="button" onclick="hourBeep()">cuckoo</button>
     <br>
     <br>
-    <!-- 默认提醒时间 -->
+    
     <input type="number" id="hourTime" value="21">:
     <input type="number" id="minusTime" value="10">:
     <input type="number" id="secondsTime" value="0">
     <button class="alarmBeep"type="button" id="alarm" onclick="clickalarmBeep()"> time to sleep </button>
-  </div>
+  </div> -->
 
 
 
@@ -141,14 +165,12 @@ background-postion: center;
       if(flag_alarmbeep==true)
       {
         console.log("开了闹钟")
-        y.innerHTML='time to sleep'
-        y.style.color="#000000";
+        y.style.color="#ffffff";
         setInterval("alarmBeep()",1000)
       }
       else
       {
         y.style.color="#eeeeee";
-        y.innerHTML='定时提醒关'
         clearInterval(alarmBeepRepeat)
         console.log("关了闹钟")
       }
@@ -169,13 +191,11 @@ background-postion: center;
       {
         console.log("开了布谷")
         x.style.color="#000000";
-        x.innerHTML='cukoo'
         setInterval("funHourlyBeep()",1000)
       }
       else
       {
-        x.style.color="#ffffff";
-        x.innerHTML='整点报时关'
+        x.style.color="#ff0000";
         clearInterval(houlyBeepRepeat)
         console.log("关了布谷")
       }
@@ -191,11 +211,15 @@ background-postion: center;
       // var timeString = date.toLocaleTimeString("it-IT")
       var apm="AM"
       var hourT=date.getHours()
+      // console.log(hourT)
       if(Number(date.getHours())>=13)
       {
         apm="PM"
-        houtT=Number(date.getHours())-12
+        hourT=Number(date.getHours())-12
       }
+      // console.log(hourT)
+
+
       var timeString = hourT + ':' + ('0' + date.getMinutes()).slice(-2) + ':' + ('0'+date.getSeconds()).slice(-2)
 
 
@@ -208,7 +232,6 @@ background-postion: center;
     }
 
     //整点报时
-    //早上9点到晚上9点
     function funHourlyBeep() {
       var date = new Date()
       var utc8DiffMinutes = date.getTimezoneOffset() + 480
@@ -221,10 +244,7 @@ background-postion: center;
       // Number(date.getSeconds())==0 || Number(date.getSeconds())==20||Number(date.getSeconds())==40
       if(
         Number(date.getMinutes())==0 &&
-        Number(date.getSeconds())==0 &&
-        Number(date.getHours())>=9   &&
-        Number(date.getHours())<=21
-        )
+        Number(date.getSeconds())==0 )
       {
         var music = new Audio('./布谷鸟叫声mp3_爱给网_aigei_com.wav');
         music.play();
@@ -247,18 +267,23 @@ background-postion: center;
       }
     }
 
+    function updateWea(){
+      // document.getElementById("weatheriframe").contentWindow.location.reload(true);
+      // document.frames('weatheriframe').location.reload()
+    }
 
-
-
+    // updateWea()
+    // 一小时刷新一次天气
+    // setInterval("updateWea()",3600)
 
     update()
     setInterval("update()", 1000)
 
-    funHourlyBeep()
-    var houlyBeepRepeat=setInterval("funHourlyBeep()",1000)
+    // funHourlyBeep()
+    // var houlyBeepRepeat=setInterval("funHourlyBeep()",1000)
 
-    alarmBeep()
-    var alarmBeepRepeat=setInterval("alarmBeep()",1000)
+    // alarmBeep()
+    // var alarmBeepRepeat=setInterval("alarmBeep()",1000)
 
 
 
